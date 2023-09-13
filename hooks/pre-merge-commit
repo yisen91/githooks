@@ -1,0 +1,28 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 当前分支的名称
+CURRENT_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+# 受保护的分支
+PROTECTED_BRANCH_NAME="master"
+
+# 禁止合并的分支
+FORBIDDEN_BRANCH_NAME="testing"
+
+if [[ -e .git/MERGE_HEAD ]]; then
+  MERGE_HEAD=`cat .git/MERGE_HEAD`
+
+  # 合并进来的分支名称
+  MERGE_BRANCH_NAME=$(git name-rev $MERGE_HEAD)
+
+  if [[ "$CURRENT_BRANCH_NAME" == *"$PROTECTED_BRANCH_NAME"* ]]; then
+      if [[ "$MERGE_BRANCH_NAME" == *"$FORBIDDEN_BRANCH_NAME"* ]]; then
+          echo "检测到非法合并: ${MERGE_BRANCH_NAME//$MERGE_HEAD / } ==into==> $CURRENT_BRANCH_NAME"
+          echo "撤销合并中..."
+          $(git reset --keep HEAD~1)
+          echo "已撤销合并 done"
+          exit 1
+      fi
+  fi
+fi

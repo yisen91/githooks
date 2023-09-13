@@ -1,0 +1,40 @@
+{
+  "name": "githooks",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "bump": "bumpp package.json -c -p -t --all -x \"pnpm run changelog\"",
+    "up": "pnpm update --i --L"
+  },
+  "keywords": [],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": "./dist/bin.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@minko-fe/eslint-config-ts": "^1.2.32",
+    "@minko-fe/tsconfig": "^1.2.32",
+    "@types/node": "^20.3.2",
+    "bumpp": "^9.2.0",
+    "conventional-changelog-cli": "^3.0.0",
+    "eslint": "^8.43.0",
+    "ts-node": "^10.9.1",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6"
+  }
+}
