@@ -1,6 +1,8 @@
 playground/
 src/
+.eslintrc.json
 .npmignore
 pnpm-lock.yaml
 pnpm-workspace.yaml
 tsup.config.ts
+tsconfig.json
