@@ -1,6 +1,6 @@
 import {
   install
-} from "./chunk-XOUVJAB6.js";
+} from "./chunk-Q4VAU6RX.js";
 export {
   install
 };

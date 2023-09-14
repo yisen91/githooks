@@ -20,7 +20,6 @@ const copyFilesSync = (source, target) => {
   files.forEach((file) => {
     const sourceFilePath = path.join(source, file)
     const targetFilePath = path.join(target, file)
-    console.log(targetFilePath)
     if (fs.lstatSync(sourceFilePath).isDirectory()) {
       copyFilesSync(sourceFilePath, targetFilePath)
     } else {
@@ -40,8 +39,6 @@ export function install(dir = '.husky'): void {
       // Copy git hooks to .husky/
       const __filename = fileURLToPath(import.meta.url);
       const __dirname = dirname(__filename);
-      console.log('source', path.join(__dirname, "../hooks"))
-      console.log('target', dir)
 
       copyFilesSync(path.join(__dirname, "../hooks"), dir);
 

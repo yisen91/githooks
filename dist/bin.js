@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {
   install
-} from "./chunk-XOUVJAB6.js";
+} from "./chunk-Q4VAU6RX.js";
 
 // src/bin.ts
 function help(code) {
