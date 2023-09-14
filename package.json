@@ -1,5 +1,5 @@
 {
-  "name": "githooks",
+  "name": "qy-githooks",
   "type": "module",
   "version": "0.0.1",
   "description": "",
@@ -20,7 +20,9 @@
       "import": "./dist/index.js"
     }
   },
-  "bin": "./dist/bin.js",
+  "bin": {
+    "githooks": "./dist/bin.js"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
