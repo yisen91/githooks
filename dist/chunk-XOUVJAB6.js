@@ -3,7 +3,7 @@ import path from "node:path";
 import { dirname } from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
-var l = (msg) => console.log(`husky - ${msg}`);
+var l = (msg) => console.log(`githooks - ${msg}`);
 var copyFilesSync = (source, target) => {
   if (!fs.existsSync(target)) {
     fs.mkdirSync(target);
@@ -12,6 +12,7 @@ var copyFilesSync = (source, target) => {
   files.forEach((file) => {
     const sourceFilePath = path.join(source, file);
     const targetFilePath = path.join(target, file);
+    console.log(targetFilePath);
     if (fs.lstatSync(sourceFilePath).isDirectory()) {
       copyFilesSync(sourceFilePath, targetFilePath);
     } else {
@@ -27,6 +28,8 @@ function install(dir = ".husky") {
   try {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
+    console.log("source", path.join(__dirname, "../hooks"));
+    console.log("target", dir);
     copyFilesSync(path.join(__dirname, "../hooks"), dir);
   } catch (e) {
     l("Git hooks failed to install");

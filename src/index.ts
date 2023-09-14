@@ -5,7 +5,7 @@ import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 // Logger
-const l = (msg: string): void => console.log(`husky - ${msg}`)
+const l = (msg: string): void => console.log(`githooks - ${msg}`)
 
 // Execute Git command
 const git = (args: string[]): child_process.SpawnSyncReturns<Buffer> =>
@@ -20,6 +20,7 @@ const copyFilesSync = (source, target) => {
   files.forEach((file) => {
     const sourceFilePath = path.join(source, file)
     const targetFilePath = path.join(target, file)
+    console.log(targetFilePath)
     if (fs.lstatSync(sourceFilePath).isDirectory()) {
       copyFilesSync(sourceFilePath, targetFilePath)
     } else {
@@ -36,9 +37,11 @@ export function install(dir = '.husky'): void {
   
     try {
   
-      // Copy husky.sh to .husky/_/husky.sh
+      // Copy git hooks to .husky/
       const __filename = fileURLToPath(import.meta.url);
       const __dirname = dirname(__filename);
+      console.log('source', path.join(__dirname, "../hooks"))
+      console.log('target', dir)
 
       copyFilesSync(path.join(__dirname, "../hooks"), dir);
 

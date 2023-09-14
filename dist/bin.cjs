@@ -30,7 +30,7 @@ var import_node_path2 = require("path");
 var import_node_fs = __toESM(require("fs"), 1);
 var import_node_url = require("url");
 var import_meta = {};
-var l = (msg) => console.log(`husky - ${msg}`);
+var l = (msg) => console.log(`githooks - ${msg}`);
 var copyFilesSync = (source, target) => {
   if (!import_node_fs.default.existsSync(target)) {
     import_node_fs.default.mkdirSync(target);
@@ -39,6 +39,7 @@ var copyFilesSync = (source, target) => {
   files.forEach((file) => {
     const sourceFilePath = import_node_path.default.join(source, file);
     const targetFilePath = import_node_path.default.join(target, file);
+    console.log(targetFilePath);
     if (import_node_fs.default.lstatSync(sourceFilePath).isDirectory()) {
       copyFilesSync(sourceFilePath, targetFilePath);
     } else {
@@ -54,6 +55,8 @@ function install(dir = ".husky") {
   try {
     const __filename = (0, import_node_url.fileURLToPath)(import_meta.url);
     const __dirname = (0, import_node_path2.dirname)(__filename);
+    console.log("source", import_node_path.default.join(__dirname, "../hooks"));
+    console.log("target", dir);
     copyFilesSync(import_node_path.default.join(__dirname, "../hooks"), dir);
   } catch (e) {
     l("Git hooks failed to install");
